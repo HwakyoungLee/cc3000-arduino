@@ -36,7 +36,7 @@ THE SOFTWARE.
 #include "BERGCloudMessageBuffer.h"
 #endif
 
-#define BERGCLOUD_LIB_VERSION (0x0201)
+#define BERGCLOUD_LIB_VERSION (0x0202)
 #define PROJECT_KEY_CHANGE_REQUIRES_RECLAIM
 
 typedef struct {

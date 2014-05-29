@@ -74,9 +74,9 @@ bool BERGCloudCC3000::connectToNetwork(void)
      return false; 
   }
   
-  Serial.print("BERGCloud: CC3000 firmware version ");
+  Serial.print(F("BERGCloud: CC3000 firmware version "));
   Serial.print(major, DEC);
-  Serial.print(".");
+  Serial.print(F("."));
   Serial.println(minor, DEC);
   
   if (!cc3000->getMacAddress(MACAddress))
@@ -84,17 +84,17 @@ bool BERGCloudCC3000::connectToNetwork(void)
     return false;
   }
 
-  Serial.print("BERGCloud: CC3000 MAC address ");
+  Serial.print(F("BERGCloud: CC3000 MAC address "));
   Serial.print(MACAddress[0], HEX);
-  Serial.print(":");
+  Serial.print(F(":"));
   Serial.print(MACAddress[1], HEX);
-  Serial.print(":");
+  Serial.print(F(":"));
   Serial.print(MACAddress[2], HEX);
-  Serial.print(":");
+  Serial.print(F(":"));
   Serial.print(MACAddress[3], HEX);
-  Serial.print(":");
+  Serial.print(F(":"));
   Serial.print(MACAddress[4], HEX);
-  Serial.print(":");
+  Serial.print(F(":"));
   Serial.println(MACAddress[5], HEX);
 
   if (!isNonZero(MACAddress, sizeof(MACAddress)))
@@ -502,7 +502,7 @@ bool BERGCloudCC3000::pollForDeviceCommand(void)
   char *text = aJson.print(root);
   if (text != NULL)
   {
-    Serial.println("Command JSON:");
+    Serial.println(F("Command JSON:"));
     Serial.println(text);
     free(text);
   }

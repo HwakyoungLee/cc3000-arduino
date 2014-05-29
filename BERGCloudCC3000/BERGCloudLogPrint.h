@@ -36,7 +36,7 @@ THE SOFTWARE.
 #undef PROGMEM
 #define PROGMEM __attribute__((section(".progmem.data")))
 #endif // #ifdef PROGMEM
-#define _LOG(x) Serial.print("BERGCloud: "); Serial.println(F(x))
+#define _LOG(x) Serial.print(F("BERGCloud: ")); Serial.println(F(x))
 #define _LOG_HEX(x) if ((x) < 0x10) Serial.print(F("0")); Serial.print((x), HEX)
 #else // #ifdef ARDUINO
 #include <stdio.h>
