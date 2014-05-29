@@ -31,14 +31,14 @@ THE SOFTWARE.
 #include <stdint.h>
 
 /* Default buffer size */
-#ifndef B_DEFAULT_BUFFER_SIZE_BYTES
-#define B_DEFAULT_BUFFER_SIZE_BYTES 64
+#ifndef BC_DEFAULT_BUFFER_SIZE_BYTES
+#define BC_DEFAULT_BUFFER_SIZE_BYTES 64
 #endif
 
 class BERGCloudMessageBuffer
 {
 public:
-  BERGCloudMessageBuffer(uint16_t size = B_DEFAULT_BUFFER_SIZE_BYTES);
+  BERGCloudMessageBuffer(uint16_t size = BC_DEFAULT_BUFFER_SIZE_BYTES);
   ~BERGCloudMessageBuffer();
   uint16_t size(void);
   uint8_t *ptr(void);
@@ -65,4 +65,4 @@ protected:
   uint16_t bytesRead;
 };
 
-#endif // #ifndef BERGMESSAGEBUFFER_H
+#endif // #ifndef BERGCLOUDMESSAGEBUFFER_H
