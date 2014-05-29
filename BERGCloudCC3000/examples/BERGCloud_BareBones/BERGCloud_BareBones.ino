@@ -143,7 +143,7 @@ void loop()
       ////////////////////////////////
 
       if (BERGCloud.pollForCommand(command, commandName)){
-        Serial.println("Recieved command:\t"+commandName);
+        Serial.println("Received command:\t"+commandName);
 
         receivedCommand = true;
         // Try to decode the two common types of serialized
