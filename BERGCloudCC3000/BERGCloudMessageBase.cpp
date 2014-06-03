@@ -36,6 +36,11 @@ BERGCloudMessageBase::BERGCloudMessageBase(void)
 {
 }
 
+BERGCloudMessageBase::BERGCloudMessageBase(uint16_t size)
+  : BERGCloudMessageBuffer(size)
+{
+}
+
 BERGCloudMessageBase::~BERGCloudMessageBase(void)
 {
 }

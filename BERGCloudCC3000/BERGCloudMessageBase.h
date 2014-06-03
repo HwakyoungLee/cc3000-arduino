@@ -46,6 +46,7 @@ class BERGCloudMessageBase : public BERGCloudMessageBuffer
 {
 public:
   BERGCloudMessageBase(void);
+  BERGCloudMessageBase(uint16_t size);
   ~BERGCloudMessageBase(void);
 
   /*

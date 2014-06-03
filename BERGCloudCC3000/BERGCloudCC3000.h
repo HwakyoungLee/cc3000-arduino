@@ -126,6 +126,13 @@ private:
 class BERGCloudMessage : public BERGCloudMessageBase
 {
   public:
+  BERGCloudMessage()
+  {
+  }
+  BERGCloudMessage(uint16_t size)
+    : BERGCloudMessageBase(size)
+  {
+  }
   using BERGCloudMessageBase::pack;
   using BERGCloudMessageBase::unpack;
   /* Pack a 4-byte double */
