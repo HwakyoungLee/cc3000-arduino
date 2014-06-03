@@ -110,6 +110,7 @@ private:
   bool _sendEvent(uint16_t eventCode, uint8_t *eventBuffer, uint16_t eventSize);
   void bytecpy(uint8_t *dst, uint8_t *src, uint16_t size);
   virtual bool sendConnectEvent(void);
+  virtual uint8_t randomByte(void);
   void arrayToString(String& string, uint8_t *array, uint8_t items);
   uint8_t getResetSource(void);
   Adafruit_CC3000 *cc3000;

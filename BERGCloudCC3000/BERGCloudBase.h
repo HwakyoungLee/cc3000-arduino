@@ -80,7 +80,7 @@ public:
   /* Connect */
   bool connect(const char *key, uint16_t version);
   /* Get the current claimcode */
-  virtual bool getClaimcode(char (&claimcode)[BC_CLAIMCODE_SIZE_BYTES], boolean hyphens = true);
+  virtual bool getClaimcode(char (&claimcode)[BC_CLAIMCODE_SIZE_BYTES], bool hyphens = true);
   /* Generate a new claimcode */
   bool resetClaimcode(void);
   /* Get the Device Address */
@@ -120,6 +120,7 @@ private:
   bool _sendEvent(uint16_t eventCode, uint8_t *eventBuffer, uint16_t eventSize);
   void bytecpy(uint8_t *dst, uint8_t *src, uint16_t size);
   virtual bool sendConnectEvent(void) = 0;
+  virtual uint8_t randomByte(void) = 0;
   BC_NVRAM nvram;
   bool connected;
   bool receivedDeviceAddress;

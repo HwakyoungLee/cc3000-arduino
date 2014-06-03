@@ -28,6 +28,7 @@ THE SOFTWARE.
 #include <stdint.h>
 #include <stddef.h>
 #include <string.h> /* For memcpy() */
+#include <stdlib.h> /* For free() */
 
 #include "BERGCloudBase.h"
 
@@ -432,14 +433,11 @@ bool BERGCloudBase::resetNVData(void)
   
   /* Set size */
   nvram.size = sizeof(nvram);
-    
-  /* Generate random secret */
-  randomSeed(analogRead(BC_UNUSED_AIN));
-  
+
   /* Set secret */
   for (i = 0; i< sizeof(nvram.secret); i++)
   {
-    nvram.secret[i] = random(0, 256);
+    nvram.secret[i] = randomByte();
   }
 
   /* Set project key */
@@ -529,7 +527,7 @@ char BERGCloudBase::toClaimcodeChar(uint8_t n)
   return '!';
 }
 
-bool BERGCloudBase::getClaimcode(char (&claimcode)[BC_CLAIMCODE_SIZE_BYTES], boolean hyphens)
+bool BERGCloudBase::getClaimcode(char (&claimcode)[BC_CLAIMCODE_SIZE_BYTES], bool hyphens)
 {
   uint16_t crc = 0xffff;
   uint8_t tmp[CLAIMCODE_SIZE_BASE32];

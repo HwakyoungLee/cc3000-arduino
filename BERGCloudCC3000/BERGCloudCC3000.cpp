@@ -39,6 +39,8 @@ void BERGCloudCC3000::begin(BERGCloudWLANConfig& WLANConfig)
 
 void BERGCloudCC3000::begin(void)
 {
+  /* Seed PRNG */
+  randomSeed(analogRead(BC_UNUSED_AIN));
   /* Call parent class method */
   BERGCloudBase::begin();
 }
@@ -68,22 +70,25 @@ bool BERGCloudCC3000::connectToNetwork(void)
   {
     /* Don't return here - begin() can return false if useSmartConfigData is true */
   }
-  
+
   if(!cc3000->getFirmwareVersion(&major, &minor))
   {
      return false; 
   }
-  
+
+#ifdef BERGCLOUD_LOG
   Serial.print(F("BERGCloud: CC3000 firmware version "));
   Serial.print(major, DEC);
   Serial.print(F("."));
   Serial.println(minor, DEC);
-  
+#endif
+
   if (!cc3000->getMacAddress(MACAddress))
   {
     return false;
   }
 
+#ifdef BERGCLOUD_LOG
   Serial.print(F("BERGCloud: CC3000 MAC address "));
   Serial.print(MACAddress[0], HEX);
   Serial.print(F(":"));
@@ -96,6 +101,7 @@ bool BERGCloudCC3000::connectToNetwork(void)
   Serial.print(MACAddress[4], HEX);
   Serial.print(F(":"));
   Serial.println(MACAddress[5], HEX);
+#endif
 
   if (!isNonZero(MACAddress, sizeof(MACAddress)))
   {
@@ -150,12 +156,14 @@ bool BERGCloudCC3000::connectToNetwork(void)
   }
   else
   {
+#ifdef BERGCLOUD_LOG
     Serial.print(F("BERGCloud: IP address:  ")); cc3000->printIPdotsRev(ipAddress);
     Serial.print(F("\nBERGCloud: Netmask:     ")); cc3000->printIPdotsRev(netmask);
     Serial.print(F("\nBERGCloud: Gateway:     ")); cc3000->printIPdotsRev(gateway);
     Serial.print(F("\nBERGCloud: DHCP server: ")); cc3000->printIPdotsRev(dhcpserv);
     Serial.print(F("\nBERGCloud: DNS server:  ")); cc3000->printIPdotsRev(dnsserv);
     Serial.println();
+#endif
   }
 
   /* Possible workaround for MDNS / UDP issues. See also retries of DNS lookup below. */
@@ -175,8 +183,10 @@ bool BERGCloudCC3000::connectToNetwork(void)
     host_ip = 0;
     dnsAttempts = DNS_RESOLVE_ATTEMPTS;
 
+#ifdef BERGCLOUD_LOG
     Serial.print(F("BERGCloud: Looking up host: "));
     Serial.println(BC_WEBSOCKET_HOST_NAME);
+#endif
 
     do {
 
@@ -214,8 +224,10 @@ bool BERGCloudCC3000::connectToNetwork(void)
     host_ip |= BC_WEBSOCKET_HOST_IP[3];
   }
 
+#ifdef BERGCLOUD_LOG
   Serial.print(F("BERGCloud: Host IP address: ")); cc3000->printIPdotsRev(host_ip);
   Serial.println();
+#endif
 
   wlan.client = cc3000->connectTCP(host_ip, BC_WEBSOCKET_PORT);
   
@@ -726,6 +738,11 @@ uint8_t BERGCloudCC3000::getResetSource(void)
   MCUSR = 0;
 
   return s;
+}
+
+uint8_t BERGCloudCC3000::randomByte(void)
+{
+  return random(0, 256);
 }
 
 #ifdef BERGCLOUD_PACK_UNPACK
