@@ -39,6 +39,7 @@ class BERGCloudMessageBuffer
 {
 public:
   BERGCloudMessageBuffer(uint16_t size = BC_DEFAULT_BUFFER_SIZE_BYTES);
+  BERGCloudMessageBuffer(const BERGCloudMessageBuffer& parent);
   ~BERGCloudMessageBuffer();
   uint16_t size(void);
   uint8_t *ptr(void);

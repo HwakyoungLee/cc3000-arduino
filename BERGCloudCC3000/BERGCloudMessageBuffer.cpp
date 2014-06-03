@@ -25,6 +25,7 @@ THE SOFTWARE.
 */
 
 #include "BERGCloudMessageBuffer.h"
+#include "string.h" // For memcpy()
 
 BERGCloudMessageBuffer::BERGCloudMessageBuffer(uint16_t size)
 {
@@ -37,6 +38,24 @@ BERGCloudMessageBuffer::BERGCloudMessageBuffer(uint16_t size)
   }
   
   clear();
+}
+
+BERGCloudMessageBuffer::BERGCloudMessageBuffer(const BERGCloudMessageBuffer& parent)
+{
+  bufferSize = parent.bufferSize;
+  bytesWritten = parent.bytesWritten;
+  bytesRead = parent.bytesRead;
+
+  /* Create a new buffer */
+  buffer = new uint8_t[bufferSize];
+  
+  if (buffer == 0)
+  {
+    bufferSize = 0;
+  }
+  
+  /* Copy buffer contents */
+  memcpy(buffer, parent.buffer, bufferSize);
 }
 
 BERGCloudMessageBuffer::~BERGCloudMessageBuffer(void)
