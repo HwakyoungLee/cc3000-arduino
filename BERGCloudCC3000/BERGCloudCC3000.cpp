@@ -552,6 +552,18 @@ bool BERGCloudCC3000::pollForDeviceCommand(void)
     aJson.deleteItem(root);
     return false;
   }
+
+  /* Remove spurious '\n' */
+  char *in, *out;
+  in = out = payload->valuestring;
+
+  do {
+    if (*in != '\n')
+    {
+      *out++ = *in;
+    }
+    
+  } while (*in++ != '\0');
   
   /* Get decoded size & allocate memory */
   binaryDataSize = base64_dec_len(payload->valuestring, strlen(payload->valuestring));
