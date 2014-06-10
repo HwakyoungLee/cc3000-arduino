@@ -617,21 +617,21 @@ bool BERGCloudCC3000::pollForDeviceCommand(void)
   if (cmd == BC_COMMAND_SET_ADDRESS)
   {
     /* Validate data size */
-    if ((unsigned long)binaryDataSize >=  (BC_COMMAND_HEADER_SIZE_BYTES + sizeof(deviceAddress)))
+    if ((unsigned long)binaryDataSize >=  (BC_COMMAND_HEADER_SIZE_BYTES + sizeof(deviceID)))
     {
       /* Copy address - change endian */
-      for (i=0; i<sizeof(deviceAddress); i++)
+      for (i=0; i<sizeof(deviceID); i++)
       {
-        deviceAddress[i] = binaryData[BC_COMMAND_HEADER_SIZE_BYTES + sizeof(deviceAddress) - i - 1];
+        deviceID[i] = binaryData[BC_COMMAND_HEADER_SIZE_BYTES + sizeof(deviceID) - i - 1];
       }
       
       free(binaryData);
       
       
-      if (isNonZero(deviceAddress, sizeof(deviceAddress)))
+      if (isNonZero(deviceID, sizeof(deviceID)))
       {
         /* Update connect and claiming states */
-        deviceAddressUpdated();
+        deviceIDUpdated();
         
         /* Send response - success */
         sendDeviceCommandResponse(command_id->valueint, 0);
@@ -730,16 +730,16 @@ bool BERGCloudCC3000::getClaimcode(String& claimcode, boolean hyphens)
   return true;
 }
 
-bool BERGCloudCC3000::getDeviceAddress(String &address)
+bool BERGCloudCC3000::getDeviceID(String &address)
 {
-  uint8_t adr[BC_DEVICE_ADDRESS_SIZE_BYTES];
+  uint8_t adr[BC_DEVICE_ID_SIZE_BYTES];
   
-  if (!getDeviceAddress(adr))
+  if (!getDeviceID(adr))
   {
     return false;
   }
   
-  arrayToString(address, adr, BC_DEVICE_ADDRESS_SIZE_BYTES);
+  arrayToString(address, adr, BC_DEVICE_ID_SIZE_BYTES);
   return true;
 }
 

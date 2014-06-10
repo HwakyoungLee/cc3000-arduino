@@ -83,8 +83,8 @@ public:
   virtual bool getClaimcode(char (&claimcode)[BC_CLAIMCODE_SIZE_BYTES], bool hyphens = true);
   /* Generate a new claimcode */
   bool resetClaimcode(void);
-  /* Get the Device Address */
-  virtual bool getDeviceAddress(uint8_t (&address)[BC_DEVICE_ADDRESS_SIZE_BYTES]);
+  /* Get the Device ID */
+  virtual bool getDeviceID(uint8_t (&address)[BC_DEVICE_ID_SIZE_BYTES]);
   /* NULL project key */
   static uint8_t nullKey[BC_KEY_SIZE_BYTES];
 
@@ -103,13 +103,13 @@ protected:
   virtual bool sendDeviceEvent(uint8_t *header, uint16_t headerSize, uint8_t *data, uint16_t dataSize) =0;
   virtual bool pollForDeviceCommand(void) =0;
   virtual bool sendDeviceCommandResponse(uint32_t command_id, uint8_t returnCode) =0;
-  bool deviceAddressUpdated(void);
+  bool deviceIDUpdated(void);
   bool reconnect(void);
   void eventDisconnected(void);
   void eventConnected(void);
   const char *_key;
   uint16_t _version;
-  uint8_t deviceAddress[BC_DEVICE_ADDRESS_SIZE_BYTES];
+  uint8_t deviceID[BC_DEVICE_ID_SIZE_BYTES];
   uint8_t hardwareAddress[BC_EUI64_SIZE_BYTES];
   COMMAND_TYPE command;
 private:
@@ -123,7 +123,7 @@ private:
   virtual uint8_t randomByte(void) = 0;
   BC_NVRAM nvram;
   bool connected;
-  bool receivedDeviceAddress;
+  bool receivedDeviceID;
 };
 
 #endif // #ifndef BERGCLOUDBASE_H

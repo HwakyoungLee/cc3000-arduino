@@ -77,8 +77,8 @@ class BERGCloudCC3000 : public BERGCloudBase
 public:
   using BERGCloudBase::getClaimcode;
   virtual bool getClaimcode(String& claimcode, boolean hyphens = true);
-  using BERGCloudBase::getDeviceAddress;
-  bool getDeviceAddress(String &address);
+  using BERGCloudBase::getDeviceID;
+  bool getDeviceID(String &address);
 #ifdef BERGCLOUD_PACK_UNPACK
   using BERGCloudBase::pollForCommand;
   bool pollForCommand(BERGCloudMessageBuffer& buffer, String &commandName);

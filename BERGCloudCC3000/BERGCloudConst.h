@@ -30,7 +30,7 @@ THE SOFTWARE.
 
 #define BC_MAC48_SIZE_BYTES             6
 #define BC_EUI64_SIZE_BYTES             8
-#define BC_DEVICE_ADDRESS_SIZE_BYTES    8
+#define BC_DEVICE_ID_SIZE_BYTES         8
 #define BC_CLAIMCODE_SIZE_BYTES         20
 #define BC_CLAIMCODE_BASE32_SIZE_BYTES  16
 #define BC_SECRET_SIZE_BYTES            8

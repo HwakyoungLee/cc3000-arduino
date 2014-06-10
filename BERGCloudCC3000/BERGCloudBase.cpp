@@ -285,7 +285,7 @@ bool BERGCloudBase::getConnectionState(uint8_t& state)
 {
   if (connected)
   {
-    if (receivedDeviceAddress)
+    if (receivedDeviceID)
     {
       state = BC_CONNECT_STATE_CONNECTED;
     }
@@ -402,10 +402,10 @@ bool BERGCloudBase::updateNVData(void)
   return nvRamWrite(pNvram, sizeof(nvram)); 
 }
 
-bool BERGCloudBase::deviceAddressUpdated(void)
+bool BERGCloudBase::deviceIDUpdated(void)
 {
   /* Connected */
-  receivedDeviceAddress = true;
+  receivedDeviceID = true;
 
   /* If not already claimed, mark as claimed */
   if (!nvram.isClaimed)
@@ -504,7 +504,7 @@ void BERGCloudBase::eventConnected(void)
 void BERGCloudBase::eventDisconnected(void)
 {
   connected = false;
-  receivedDeviceAddress = false;
+  receivedDeviceID = false;
 }
 
 char base32[32] = {
@@ -633,9 +633,9 @@ bool BERGCloudBase::getClaimcode(char (&claimcode)[BC_CLAIMCODE_SIZE_BYTES], boo
   return true;
 }
 
-bool BERGCloudBase::getDeviceAddress(uint8_t (&address)[BC_DEVICE_ADDRESS_SIZE_BYTES])
+bool BERGCloudBase::getDeviceID(uint8_t (&address)[BC_DEVICE_ID_SIZE_BYTES])
 {
-  memcpy(address, deviceAddress, BC_DEVICE_ADDRESS_SIZE_BYTES);
+  memcpy(address, deviceID, BC_DEVICE_ID_SIZE_BYTES);
   return true;
 }
 
@@ -656,9 +656,9 @@ void BERGCloudBase::begin(void)
   _key = NULL;
   _version = 0;
   connected = false;
-  receivedDeviceAddress = false;
+  receivedDeviceID = false;
   memset((uint8_t *)&nvram, 0x00, sizeof(nvram));
-  memset(deviceAddress, 0x00, sizeof(deviceAddress));
+  memset(deviceID, 0x00, sizeof(deviceID));
   memset(hardwareAddress, 0x00, sizeof(hardwareAddress));
   memset(&command, 0x00, sizeof(command));
 }

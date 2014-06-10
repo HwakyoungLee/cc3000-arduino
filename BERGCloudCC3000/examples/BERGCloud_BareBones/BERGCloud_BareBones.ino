@@ -52,7 +52,7 @@ THE SOFTWARE.
 unsigned long pollTimer;
 int pollGap = 1000;
 unsigned long connectionTimeMS;
-String deviceAddress;
+String deviceID;
 boolean receivedCommand;
 
 void setup()
@@ -189,9 +189,9 @@ void loop()
       ////////////////////////////////
       /// GENERAL STATUS REPORT
       ////////////////////////////////
-      BERGCloud.getDeviceAddress(deviceAddress);
+      BERGCloud.getDeviceAddress(deviceID);
       Serial.print("Device: ");
-      Serial.print(deviceAddress);
+      Serial.print(deviceID);
       Serial.print(" Up time = ");
       Serial.print((millis()-connectionTimeMS)/1000);
 
