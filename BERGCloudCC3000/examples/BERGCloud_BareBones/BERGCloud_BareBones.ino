@@ -131,8 +131,6 @@ void loop()
 
       pollTimer=millis();
 
-      String address;
-
       BERGCloudMessage command, event;
       String text;
       int number;
@@ -189,7 +187,7 @@ void loop()
       ////////////////////////////////
       /// GENERAL STATUS REPORT
       ////////////////////////////////
-      BERGCloud.getDeviceAddress(deviceID);
+      BERGCloud.getDeviceID(deviceID);
       Serial.print("Device: ");
       Serial.print(deviceID);
       Serial.print(" Up time = ");
