@@ -27,6 +27,11 @@ THE SOFTWARE.
 #include "BERGCloudCC3000.h"
 #include "utility/socket.h" // For mdnsAdvertiser()
 
+//#define _PRINT_NVMEM_
+#ifdef _PRINT_NVMEM_
+#include "PrintNVMEM.h"
+#endif
+
 BERGCloudCC3000 BERGCloud;
 
 void BERGCloudCC3000::begin(BERGCloudWLANConfig& WLANConfig)
@@ -107,6 +112,10 @@ bool BERGCloudCC3000::connectToNetwork(void)
   {
     return false;
   }
+  
+#ifdef _PRINT_NVMEM_
+  printNVMEM();
+#endif
 
   /* Create EUI64 */
   MAC48toEUI64(MACAddress, hardwareAddress);
@@ -834,17 +843,26 @@ bool BERGCloudMessage::unpack_boolean(boolean &n)
   return true;
 }
 
-bool BERGCloudCC3000::pollForCommand(BERGCloudMessageBuffer& buffer, String &commandName)
+bool BERGCloudCC3000::pollForCommand(BERGCloudMessageBuffer& buffer, String& commandName)
+{
+  String unused;
+  
+  return pollForCommand(buffer, commandName, unused);
+}
+
+bool BERGCloudCC3000::pollForCommand(BERGCloudMessageBuffer& buffer, String& commandName, String& commandID)
 {
   bool result = false;
   char tmp[31 + 1]; /* +1 for null terminator */
+  uint32_t id = 0;
 
   commandName = ""; /* Empty string */
-  result = pollForCommand(buffer, (char *)tmp, (uint8_t)sizeof(tmp));
+  result = pollForCommand(buffer, (char *)tmp, (uint8_t)sizeof(tmp), &id);
 
   if (result)
   {
     commandName = String(tmp);
+    commandID = String(id);
   }
 
   return result;

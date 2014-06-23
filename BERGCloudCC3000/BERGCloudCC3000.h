@@ -81,7 +81,8 @@ public:
   bool getDeviceID(String &address);
 #ifdef BERGCLOUD_PACK_UNPACK
   using BERGCloudBase::pollForCommand;
-  bool pollForCommand(BERGCloudMessageBuffer& buffer, String &commandName);
+  bool pollForCommand(BERGCloudMessageBuffer& buffer, String& commandName);
+  bool pollForCommand(BERGCloudMessageBuffer& buffer, String& commandName, String& commandID);
   using BERGCloudBase::sendEvent;
   bool sendEvent(String& eventName, BERGCloudMessageBuffer& buffer);
 #endif

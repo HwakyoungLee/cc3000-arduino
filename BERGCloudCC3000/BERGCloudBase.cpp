@@ -39,7 +39,7 @@ THE SOFTWARE.
 
 uint8_t BERGCloudBase::nullKey[BC_KEY_SIZE_BYTES] = {0};
 
-bool BERGCloudBase::pollForCommand(uint8_t *commandBuffer, uint16_t commandBufferSize, uint16_t& commandSize, char *commandName, uint8_t commandNameMaxSize)
+bool BERGCloudBase::pollForCommand(uint8_t *commandBuffer, uint16_t commandBufferSize, uint16_t& commandSize, char *commandName, uint8_t commandNameMaxSize, uint32_t *id)
 {
   /* Returns TRUE if a valid command has been received */
   uint8_t commandNameSize;
@@ -95,6 +95,12 @@ bool BERGCloudBase::pollForCommand(uint8_t *commandBuffer, uint16_t commandBuffe
           /* Move up remaining packed data, update size */
           commandSize -= (originalCommandNameSize + 1); /* +1 for messagePack fixraw byte */
           bytecpy(commandBuffer, commandBuffer + (originalCommandNameSize + 1), commandSize);
+          
+          /* Copy Command ID */
+          if (id != NULL)
+          {
+            *id = command.id;
+          }
 
           /* Success */
           result = true;
@@ -114,7 +120,7 @@ bool BERGCloudBase::pollForCommand(uint8_t *commandBuffer, uint16_t commandBuffe
 }
 
 #ifdef BERGCLOUD_PACK_UNPACK
-bool BERGCloudBase::pollForCommand(BERGCloudMessageBuffer& buffer, char *commandName, uint8_t commandNameMaxSize)
+bool BERGCloudBase::pollForCommand(BERGCloudMessageBuffer& buffer, char *commandName, uint8_t commandNameMaxSize, uint32_t *id)
 {
   /* Returns TRUE if a valid command has been received */
 
@@ -174,6 +180,12 @@ bool BERGCloudBase::pollForCommand(BERGCloudMessageBuffer& buffer, char *command
           /* Move up remaining packed data, update size */
           dataSize -= (originalCommandNameSize + 1); /* +1 for messagePack fixraw byte */
           bytecpy(buffer.ptr(), buffer.ptr() + (originalCommandNameSize + 1), dataSize);
+
+          /* Copy Command ID */
+          if (id != NULL)
+          {
+            *id = command.id;
+          }
 
           buffer.used(dataSize);
 

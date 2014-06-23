@@ -125,6 +125,9 @@ public:
   bool unpack_find(const char *key);
   /* Moves to the value associated with array index 'i' */
   bool unpack_find(uint16_t i);
+  
+  /* Get the total number of items */
+  uint16_t count(void);
 
   /* Unpack a null-terminated C string */
   bool unpack(char *string, uint32_t maxSizeInBytes);

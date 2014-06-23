@@ -506,6 +506,31 @@ void BERGCloudMessageBase::print(void)
   bytesRead = last_read;
 }
 
+uint16_t BERGCloudMessageBase::count(void)
+{
+  uint16_t last_read;
+  uint16_t items = 0;
+  uint8_t type;
+
+  /* Remember the current read position in the raw data */
+  last_read = bytesRead;
+
+  /* Start reading from the beginning of the data */
+  restart();
+
+  /* Count all items */
+  while(peek(&type))
+  {
+    items++;
+    unpack_skip();
+  }
+
+  /* Return to the last position */
+  bytesRead = last_read;
+  
+  return items;
+}
+
 void BERGCloudMessageBase::print_bytes(void)
 {
   uint16_t size = used();

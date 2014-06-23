@@ -64,9 +64,9 @@ class BERGCloudBase
 {
 public:
   /* Check for a command */
-  bool pollForCommand(uint8_t *commandBuffer, uint16_t commandBufferSize, uint16_t& commandSize, char *commandName, uint8_t commandNameMaxSize);
+  bool pollForCommand(uint8_t *commandBuffer, uint16_t commandBufferSize, uint16_t& commandSize, char *commandName, uint8_t commandNameMaxSize, uint32_t *id = NULL);
 #ifdef BERGCLOUD_PACK_UNPACK
-  bool pollForCommand(BERGCloudMessageBuffer& buffer, char *commandName, uint8_t commandNameMaxSize);
+  bool pollForCommand(BERGCloudMessageBuffer& buffer, char *commandName, uint8_t commandNameMaxSize, uint32_t *id = NULL);
 #endif
   /* Send an event */
   bool sendEvent(const char *eventName, uint8_t *eventBuffer, uint16_t eventSize, bool packed = true);
