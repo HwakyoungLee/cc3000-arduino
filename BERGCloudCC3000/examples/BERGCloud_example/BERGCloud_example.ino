@@ -48,14 +48,15 @@
 #define WLAN_SEC                      WLAN_SEC_WPA2
 
 // if set to true WLAN_RECONNECT will cause the CC3000 to try and use previously saved Smart Config data.
-// if set to false you will have to configure it everytim
+// if set to false you will have to configure it everytime
 #define WLAN_RECONNECT                true
 // These can be set to increase the security of the data transfer between the Smart Config app and your device during configuration.
 #define WLAN_SMARTCONFIG_DEVICE_NAME  "CC3000"
 #define WLAN_SMARTCONFIG_KEY          NULL
 
 // These values should be edited to reflect your Project setup on http://bergcloud.com/devcenter/
-#define PROJECT_KEY "4ec9127128acc91ce004199f930c6306"
+#define PROJECT_KEY "00000000000000000000000000000000"
+
 #define VERSION     1
 
 // set up a timer and some variables to regulate checking for commands
