@@ -32,7 +32,7 @@
 #include <Adafruit_CC3000.h>
 #include <BERGCloudCC3000.h>
 
-// This example describes how to connect use Smart Config.
+// This example describes how to connect use Smart Config with a key with the Arduino Mega and Adafruit CC3000 shield.
 
 // set WLAN_USE_SMARTCONFIG to true to use Smart Config.
 #define WLAN_USE_SMARTCONFIG          true

@@ -1,3 +1,5 @@
+// This sketch is for use with the http://bergcloud.com/devcenter/tutorials/wifi-to-website example
+
 #include <EEPROM.h>
 #include <WebSocketClient.h>
 #include <aJSON.h>

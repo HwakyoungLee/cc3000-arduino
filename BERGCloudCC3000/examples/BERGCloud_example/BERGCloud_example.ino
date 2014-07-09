@@ -32,7 +32,7 @@
 #include <Adafruit_CC3000.h>
 #include <BERGCloudCC3000.h>
 
-// This example describes how to connect to Berg, recieve commands and echo events back up to Berg.
+// This example describes how to connect to Berg, receive commands and echo events back up to Berg.
 // For a less detailed example please see WiFi_to_Website in the Examples/BERGCloudCC3000 menu.
 
 //
